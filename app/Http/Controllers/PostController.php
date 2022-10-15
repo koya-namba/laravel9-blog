@@ -10,11 +10,14 @@ class PostController extends Controller
 {
     public function index(Post $post)
     {
+        // dd($post->get());
+        // 問2：view('posts/index')は何を表しているか
         return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);
     }
     
     public function show(Post $post)
     {
+        // dd($post);
         return view('posts/show')->with(['post' => $post]);
     }
     
@@ -25,8 +28,13 @@ class PostController extends Controller
     
     public function store(PostRequest $request, Post $post)
     {
+        // 問7： $inputには何と何のデータが入っているのか
         $input = $request['post'];
+        // dd($input);
+        
+        // 問8：fill()を実行する前にはどこに何を記述すべきか
         $post->fill($input)->save();
+        
         return redirect('/posts/' . $post->id);
     }
     
